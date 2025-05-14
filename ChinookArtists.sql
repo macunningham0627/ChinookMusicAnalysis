@@ -5,20 +5,6 @@ LIMIT 10
 --this table had the quantity row, but every value was 1, so I dropped the column
 ALTER TABLE InvoiceLine DROP COLUMN Quantity
 
---test query
-SELECT c.CustomerId, c.FirstName || " " || c.LastName AS FullName, i.InvoiceId, COUNT(il.InvoiceLineId) AS NumPurchased 
-FROM Customer c
-INNER JOIN Invoice i ON c.CustomerId = i.CustomerId
-INNER JOIN InvoiceLine il on i.InvoiceId = il.InvoiceId
-GROUP BY i.InvoiceId
-ORDER BY 1
-
---we can see that only employees 3-5 connect to other tables
-SELECT c.SupportRepId
-FROM Customer c
-ORDER BY 1 ASC
-LIMIT 10
-
 --Which artists have sold the most units?
 SELECT ar.ArtistId, ar.Name, COUNT(il.InvoiceLineId) AS NumUnits
 FROM Artist ar
